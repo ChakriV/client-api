@@ -1,0 +1,67 @@
+type Client {
+    id: ID!
+    name: String!
+    programs: [Program!]
+}
+
+type Program {
+    id: String!
+    isActive: Boolean!
+    name: String!
+    influencers: [Influencer!]
+    totalImpressions: Int
+    engagementRate: Float
+}
+
+type Influencer {
+    id: String!
+    name: String!
+    location: String
+    posts: [Post!]
+    ageRange: String
+    engagementRate: Float
+}
+
+type Post {
+    id: ID!
+    isActive: Boolean!
+    url: String!
+    platform: String!
+    name: String!
+}
+
+type AggregateData {
+    likes: Int!
+    comments: Int!
+}
+
+# The Root Query for the application
+type Query {
+    clients(count: Int, offset: Int): [Client!]
+    aggregates(clientId: ID, programId: String, InfluencerId: String): AggregateData
+}
+
+input ProgramInput {
+    id: String
+    name: String!
+    starttDate: String
+    endDate: String
+}
+
+input InfluencerInput {
+    id: String
+    userAccessToken: String!
+    tokenExpiry: String!
+}
+
+input PostInput {
+    url: String!
+    platform: String!
+}
+
+# The Root Mutation for the application
+type Mutation {
+    createProgram(clientId: ID, program: ProgramInput) : Program!
+    createInfluencer(clientId: ID, programId: String, influencer: InfluencerInput) : Influencer!
+    createPost(programId: ID, influencerId: String, post: PostInput) : Post!
+}

@@ -3,6 +3,7 @@ package com.drillo.microdrive.clientapi.handler;
 import com.drillo.microdrive.clientapi.model.Client;
 import com.drillo.microdrive.clientapi.model.Influencer;
 import com.drillo.microdrive.clientapi.model.Program;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
@@ -15,14 +16,24 @@ import java.util.UUID;
 @Controller
 public class ClientHandler {
 
-    UUID testUUID1 = UUID.randomUUID();
-    UUID testUUID2 = UUID.randomUUID();
+    UUID testUUID1 = UUID.fromString("4e6f3527-5625-4e05-a11b-9493e75cfbf5");
+    UUID testUUID2 = UUID.fromString("ebfbca1d-9728-4054-a171-c8a1e6f6a534");
 
     @QueryMapping
     public List<Client> clients() {
-//        return Arrays.asList(new Client(testUUID1, "asdad"));
         return Arrays.asList(
                 buildClient(testUUID1, "Walmart"), buildClient(testUUID2, "Denny's"));
+    }
+
+    @QueryMapping
+    public Client client(@Argument(name = "id") UUID clientId) {
+        if (testUUID1.equals(clientId)) {
+            return buildClient(testUUID1, "Walmart");
+        } else if (testUUID2.equals(clientId)) {
+            return buildClient(testUUID2, "Denny's");
+        } else {
+            return null;
+        }
     }
 
     @SchemaMapping

@@ -38,8 +38,10 @@ type AggregateData {
 # The Root Query for the application
 type Query {
     clients(count: Int, offset: Int): [Client!]
+    client(id: ID!): Client
     aggregates(clientId: ID, programId: String, InfluencerId: String): AggregateData
 }
+
 
 input ProgramInput {
     id: String

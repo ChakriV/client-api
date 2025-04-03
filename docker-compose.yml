@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "8085:5432"
+    environment:
+      - POSTGRES_USER=client_rw
+      - POSTGRES_PASSWORD=password!1
+      - POSTGRES_DB=client_db

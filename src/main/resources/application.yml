@@ -13,3 +13,6 @@ spring:
     url: jdbc:postgresql://localhost:8085/client_db?currentSchema=client
     username: client_rw
     password: password!1
+
+server:
+  port: 8086

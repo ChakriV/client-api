@@ -2,11 +2,13 @@ type Client {
     id: ID!
     name: String!
     programs: [Program!]
+    influencers: [Influencer!]
 }
 
 type Program {
     id: String!
-    isActive: Boolean!
+    startDate: String
+    endDate: String
     name: String!
     influencers: [Influencer!]
     totalImpressions: Int

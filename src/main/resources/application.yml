@@ -8,11 +8,17 @@ spring:
     schemas: client
     baselineOnMigrate: true
     enabled: true
+
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:8085/client_db?currentSchema=client
     username: client_rw
     password: password!1
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
 
 server:
   port: 8086
